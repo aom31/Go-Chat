@@ -18,8 +18,6 @@ createdb:
 dropdb:
 	docker exec -it $(ContainerNamePostgres) dropdb $(DBName)
 
-.PHONY: postgresinit postgresdb createdb dropdb
-
 
 namefile=add_users_table
 dbConnSchemaOnboardingDev = 'postgresql://root:password@localhost:3100/go-chat?sslmode=disable'
@@ -36,3 +34,7 @@ migrate-down:
 version=20241029092242
 force-migrate-version:
 	migrate -path db/migrations -database $(dbConnSchemaOnboardingDev) force $(version)
+
+
+
+.PHONY: postgresinit postgresdb createdb dropdb migrate-create migrate-up migrate-down force-migrate-version
